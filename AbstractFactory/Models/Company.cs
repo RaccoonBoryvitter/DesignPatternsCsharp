@@ -11,6 +11,7 @@ namespace AbstractFactory.Models
     {
         private readonly List<ITransport> transportInfrastructure = new List<ITransport>();
         public List<Freight> Freights { get; set; }
+        public List<Freight> CurrentFreights { get; set; }
 
 
         public LogisticsFactory LogisticsFactory { get; set; }
@@ -23,17 +24,21 @@ namespace AbstractFactory.Models
 
         public void RunDeliveryThreads()
         {
-            int regular = Freights.Where(f => f.DeliverType == DeliverType.Regular).Count();
-            for (int i = 0; i < regular; i++)
-                LogisticsFactory.RegisterNewRegularVehicle();
+            DeliverType deliverType = LogisticsFactory is RegularDeliveryFactory ? DeliverType.Regular : DeliverType.Urgent;
+            CurrentFreights = Freights.Where(f => f.DeliverType == deliverType).ToList();
+            int deliveriesAmount = CurrentFreights.Count();
+            int trucksAmount = new Random().Next(deliveriesAmount) + 1;
+            for (int i = 0; i < trucksAmount; i++)
+                LogisticsFactory.RegisterNewTruck();
 
-            int urgent = Freights.Where(f => f.DeliverType == DeliverType.Urgent).Count();
-            for (int i = 0; i < urgent; i++)
-                LogisticsFactory.RegisterNewUrgentVehicle();
+            int shipAmount = deliveriesAmount - trucksAmount;
+            for (int i = 0; i < shipAmount; i++)
+                LogisticsFactory.RegisterNewShip();
 
-            transportInfrastructure.AddRange(LogisticsFactory.RegularVehicles);
-            transportInfrastructure.AddRange(LogisticsFactory.UrgentVehicles);
-            List<Thread> threads = this.InitializeDeliveryThreads(Freights.Count);
+            transportInfrastructure.Clear();
+            transportInfrastructure.AddRange(LogisticsFactory.Trucks);
+            transportInfrastructure.AddRange(LogisticsFactory.Ships);
+            List<Thread> threads = this.InitializeDeliveryThreads(deliveriesAmount);
             foreach (Thread t in threads)
             {
                 ITransport vehicle = ListRandomPicker.PickFromList(transportInfrastructure);
@@ -56,7 +61,7 @@ namespace AbstractFactory.Models
         private void RunDelivery(object transport)
         {
             ITransport t = transport as ITransport;
-            Freight freight = ListRandomPicker.PickFromList(Freights);
+            Freight freight = ListRandomPicker.PickFromList(CurrentFreights);
             if (freight.Weight <= t.WeightCapacity)
             {
                 t.Deliver(freight);

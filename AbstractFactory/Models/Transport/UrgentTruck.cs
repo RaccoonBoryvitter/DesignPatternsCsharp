@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace AbstractFactory.Models.Transport
 {
-    class UrgentTrack : ITransport
+    class UrgentTruck : ITransport
     {
         public string Rfid { get; set; }
         public double WeightCapacity { get; set; } = new Random().NextDouble() * 20.0 + 10.0;

@@ -26,15 +26,12 @@ namespace AbstractFactory
                 new Freight(31.71, DeliverType.Regular, "Freight #13")
             };
 
-            Company company = new Company(new TruckFactory())
-            {
-                Freights = freights
-            };
+            Company company = new Company(new RegularDeliveryFactory()) { Freights = freights };
             company.RunDeliveryThreads();
 
             Console.WriteLine("\n=========================================================\n");
 
-            company.LogisticsFactory = new ShipFactory();
+            company.LogisticsFactory = new UrgentDeliveryFactory();
             company.RunDeliveryThreads();
         }
     }

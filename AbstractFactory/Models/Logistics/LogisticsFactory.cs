@@ -6,28 +6,28 @@ namespace AbstractFactory.Models.Logistics
 {
     internal abstract class LogisticsFactory
     {
-        public List<ITransport> RegularVehicles { get; set; } = new List<ITransport>();
-        public List<ITransport> UrgentVehicles { get; set; } = new List<ITransport>();
+        public List<ITransport> Trucks { get; set; } = new List<ITransport>();
+        public List<ITransport> Ships { get; set; } = new List<ITransport>();
 
-        public string RegisterNewRegularVehicle()
+        public string RegisterNewTruck()
         {
-            ITransport vehicle = CreateRegularVehicle();
+            ITransport vehicle = CreateNewTruck();
             vehicle.Rfid = Guid.NewGuid().ToString();
             vehicle.IsInTheWay = false;
-            RegularVehicles.Add(vehicle);
+            Trucks.Add(vehicle);
             return $"A new regular vehicle #{vehicle.Rfid} has been registered.";
         }
 
-        public string RegisterNewUrgentVehicle()
+        public string RegisterNewShip()
         {
-            ITransport vehicle = CreateUrgentVehicle();
+            ITransport vehicle = CreateNewShip();
             vehicle.Rfid = Guid.NewGuid().ToString();
             vehicle.IsInTheWay = false;
-            UrgentVehicles.Add(vehicle);
+            Ships.Add(vehicle);
             return $"A new urgent vehicle #{vehicle.Rfid} has been registered.";
         }
 
-        public abstract ITransport CreateRegularVehicle();
-        public abstract ITransport CreateUrgentVehicle();
+        public abstract ITransport CreateNewTruck();
+        public abstract ITransport CreateNewShip();
     }
 }
