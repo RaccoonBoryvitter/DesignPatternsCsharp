@@ -23,9 +23,7 @@ namespace Prototype
             };
 
             chernivstiPosts.ForEach(i => Console.WriteLine(i));
-
             chernivtsi.PostalCode = "fsdfsdg";
-
             chernivstiPosts.ForEach(i => Console.WriteLine(i));
 
             IPost dispatchPost1 = new DispatchPost(khmelnytskyi, "Arbatska, 12");
