@@ -7,7 +7,6 @@ namespace Builder
     {
         internal static void Main(string[] args)
         {
-            // Let's imagine that we got this data from UI client on our station
             string id = Guid.NewGuid().ToString();
             Company sender = new Company()
             {
