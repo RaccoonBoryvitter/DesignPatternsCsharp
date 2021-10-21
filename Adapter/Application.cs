@@ -17,21 +17,21 @@ namespace Adapter
             ForeignShipment shipment1 = new ForeignShipment(1350, "Shipment #1");
             ForeignShipment shipment2 = new ForeignShipment(1530, "Shipment #2");
 
-            CargoVehicle vehicle1 = new CargoVehicle();
-            CargoVehicle vehicle2 = new CargoVehicle();
-            CargoVehicle vehicle3 = new CargoVehicle();
-            CargoVehicle vehicle4 = new CargoVehicle();
+            ForeignCargoVehicle vehicle1 = new ForeignCargoVehicle();
+            ForeignCargoVehicle vehicle2 = new ForeignCargoVehicle();
+            LocalCargoVehicle vehicle3 = new LocalCargoVehicle();
+            LocalCargoVehicle vehicle4 = new LocalCargoVehicle();
 
-            vehicle1.ForeignDeliver(shipment1);
-            vehicle2.ForeignDeliver(shipment2);
+            vehicle1.Deliver(shipment1);
+            vehicle2.Deliver(shipment2);
 
             Freight freight1 = new ForeignToLocalFreightAdapter(shipment1);
             freight1.To = ListRandomPicker.PickFromList(cities);
             Freight freight2 = new ForeignToLocalFreightAdapter(shipment2);
             freight2.To = ListRandomPicker.PickFromList(cities);
 
-            vehicle3.LocalDeliver(freight1);
-            vehicle4.LocalDeliver(freight2);
+            vehicle3.Deliver(freight1);
+            vehicle4.Deliver(freight2);
     }
     }
 }
