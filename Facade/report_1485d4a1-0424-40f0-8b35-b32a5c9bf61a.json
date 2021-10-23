@@ -1,0 +1,23 @@
+{
+  "Id": "1485d4a1-0424-40f0-8b35-b32a5c9bf61a",
+  "Freights": [
+    {
+      "Id": "6e7583c6-405c-458f-b62e-5330cc6ad46c",
+      "Weight": 9533.945643750576,
+      "Description": "Desc 1"
+    },
+    {
+      "Id": "a89f6e68-7399-4c09-bdbe-854b0589a591",
+      "Weight": 563.1311655440765,
+      "Description": "Desc 2"
+    },
+    {
+      "Id": "45561a9a-291e-402c-817e-160746bcccfc",
+      "Weight": 933072.4242561664,
+      "Description": "Desc 3"
+    }
+  ],
+  "Price": 1642.6494099733536,
+  "DispatchedFrom": "Khmelnytskyi",
+  "Destination": "New-York"
+}

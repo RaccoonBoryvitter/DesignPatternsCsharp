@@ -1,0 +1,18 @@
+{
+  "Id": "feeb3e94-122a-4527-9929-b2a7ab531311",
+  "Freights": [
+    {
+      "Id": "c3ee448e-dc20-4698-9fcd-4334dfd50723",
+      "Weight": 954.0063471526207,
+      "Description": "Desc 1"
+    },
+    {
+      "Id": "d9a09dd0-a3fa-46a0-953a-4bf7548bc026",
+      "Weight": 53.42021075001769,
+      "Description": "Desc 2"
+    }
+  ],
+  "Price": 309.91777693186145,
+  "DispatchedFrom": "Chernivtsi",
+  "Destination": "Chicago"
+}
