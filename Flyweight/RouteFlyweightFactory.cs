@@ -11,7 +11,7 @@ namespace Flyweight
         public RouteFlyweightFactory(params Route[] routes)
         {
             flyweights = routes.Select(r => new Tuple<RouteFlyweight, string>(
-                                                    new RouteFlyweight(r), GetKey(r)
+                                                        new RouteFlyweight(r), GetKey(r)
                                                     )
                                       )
                                .ToList();
