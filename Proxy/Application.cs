@@ -47,7 +47,7 @@ namespace Proxy
                 FuelCapacity = transport.FuelCapacity,
             };
             transport1.MaxSpeed = 1234;
-            client.UpdateExistingTransport(transport);
+            client.UpdateExistingTransport(transport1);
             Console.WriteLine("Get All: ");
             client.GetAllTransports().ForEach(item => Console.WriteLine(item));
 
