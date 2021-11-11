@@ -20,7 +20,7 @@ namespace Composite
             CargoContainer container = new CargoContainer();
             container.AddRange(cargos);
 
-            Console.WriteLine($"Overall weight: {container.Weight}");
+            Console.WriteLine($"Overall weight: {container.GetWeight()}");
             Console.WriteLine($"{container.Description}");
         }
     }

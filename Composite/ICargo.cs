@@ -13,7 +13,7 @@ namespace Composite
         public abstract decimal Weight { get; set; }
         public abstract string Description { get; set; }
 
-        abstract protected decimal GetWeight();
-        abstract protected string GetDescription();
+        abstract public decimal GetWeight();
+        abstract public string GetDescription();
     }
 }

@@ -6,9 +6,11 @@ namespace Composite
 {
     internal class CargoContainer : ICargo
     {
+        private decimal weight;
+
         public List<ICargo> Children { get; set; } = new List<ICargo>();
-        public override decimal Weight { get => GetWeight(); set => throw new NotImplementedException(); }
-        public override string Description { get => GetDescription(); set => throw new NotImplementedException(); }
+        public override decimal Weight { get; set; }
+        public override string Description { get; set; }
 
         public void Add(ICargo child)
         {
@@ -25,9 +27,9 @@ namespace Composite
             Children.Remove(child);
         }
 
-        protected override decimal GetWeight() => Children.Sum(children => children.Weight);
+        public override decimal GetWeight() => Children.Sum(children => children.Weight);
 
-        protected override string GetDescription()
+        public override string GetDescription()
         {
             var overall = Children.Select(i => i.Description)
                                   .Select(d => $" - {d};")
