@@ -37,6 +37,13 @@ namespace ChainOfResponsibility
                     SecurityType = SecurityType.Danger,
                     Description = "4"
                 },
+                new Freight
+                {
+                    Weight = 75.54,
+                    MaterialType = MaterialType.Simple,
+                    SecurityType = SecurityType.Danger,
+                    Description = "5"
+                },
             };
 
             var vehicles = new List<CargoVehicle>()

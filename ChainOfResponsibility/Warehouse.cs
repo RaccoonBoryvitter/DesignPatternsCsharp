@@ -19,7 +19,14 @@ namespace ChainOfResponsibility
             foreach (var freight in Freights)
             {
                 var shipment = handler.Handle(freight);
-                shipments.Add(shipment as Shipment);
+                if (shipment != null)
+                {
+                    shipments.Add(shipment as Shipment);
+                }
+                else
+                {
+                    continue;
+                }
             }
 
             return shipments;
