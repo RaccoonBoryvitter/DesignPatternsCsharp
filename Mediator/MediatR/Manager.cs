@@ -1,7 +1,5 @@
 ﻿using Mediator.Entity;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mediator.MediatR
 {
@@ -30,44 +28,31 @@ namespace Mediator.MediatR
             {
                 case "OnDispatchOrder":
                     {
-                        Console.WriteLine("Receiving new order...");
-                        Report.From = sender as Client;
-                        Report.Freight = evt.Args[0] as Freight;
-                        Report.To = evt.Args[1] as Client;
+                        OnDispatchOrder(sender, evt);
                         Console.WriteLine("Finding vehicle for this task...");
                         Logistics.FindVehicle(Report.Freight);
                         break;
                     }
                 case "OnVehicleNotFound":
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(evt.Args[0] as string);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        OnVehicleNotFound(sender, evt);
                         break;
                     }
                 case "OnVehicleFoundSuccess":
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(evt.Args[1] as string);
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Report.Vehicle = evt.Args[0] as Vehicle;
+                        OnVehicleFoundSuccess(sender, evt);
                         Console.WriteLine("Finding driver...");
                         Logistics.FindDriver();
                         break;
                     }
                 case "OnDriverNotFound":
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(evt.Args[0] as string);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        OnDriverNotFound(sender, evt);
                         break;
                     }
                 case "OnDriverFoundSuccess":
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(evt.Args[1] as string);
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Report.Vehicle.Driver = evt.Args[0] as Driver;
+                        OnDriverFoundSuccess(sender, evt);
                         success = true;
                         if (success)
                         {
@@ -89,6 +74,44 @@ namespace Mediator.MediatR
             }
 
             Report = new Report();
+        }
+
+        private void OnDispatchOrder(object sender, EventComponent evt)
+        {
+            Console.WriteLine("Receiving new order...");
+            Report.From = sender as Client;
+            Report.Freight = evt.Args[0] as Freight;
+            Report.To = evt.Args[1] as Client;
+        }
+
+        private void OnVehicleNotFound(object sender, EventComponent evt)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(evt.Args[0] as string);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private void OnVehicleFoundSuccess(object sender, EventComponent evt)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(evt.Args[1] as string);
+            Console.ForegroundColor = ConsoleColor.White;
+            Report.Vehicle = evt.Args[0] as Vehicle;
+        }
+
+        private void OnDriverNotFound(object sender, EventComponent evt)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(evt.Args[0] as string);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private void OnDriverFoundSuccess(object sender, EventComponent evt)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(evt.Args[1] as string);
+            Console.ForegroundColor = ConsoleColor.White;
+            Report.Vehicle.Driver = evt.Args[0] as Driver;
         }
     }
 }
