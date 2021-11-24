@@ -37,8 +37,8 @@ namespace Iterator.Models
 
         public override IEnumerator GetEnumerator()
         {
-            //return new StraightIterator(this, _direction);
-            return new WeightDependendIterator(this, _direction);
+            return new StraightIterator(this, _direction);
+            //return new WeightDependendIterator(this, _direction);
         }
     }
 }
